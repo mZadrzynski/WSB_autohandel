@@ -1,10 +1,14 @@
 package com.company;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+        Boolean gameOn = true;
+        Scanner userInput = new Scanner(System.in);
+        Time time = new Time();
         String cars[] = {"toyota", "wv", "merc", "fiat"};
         Random rand = new Random();
         int x = rand.nextInt(3);
@@ -14,6 +18,17 @@ public class Main {
 
        owner.car = car1;
 
-        System.out.println(owner.car);
+       time.runGame();
+
+       do {
+            switch(userInput.nextInt()) {
+                case 1:
+                    System.out.println(owner.car);
+                case 2:
+                    System.out.println("test");
+            }
+
+       } while(gameOn);
+
     }
 }
