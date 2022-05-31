@@ -5,15 +5,25 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        String cars[] = {"toyota", "wv", "merc", "fiat"};
+
         Random rand = new Random();
         int x = rand.nextInt(3);
 
-       Car car1 = new Car("toyota", "red", "b", 45, 20000, true, true, true, true, true);
+
        Owner owner = new Owner();
 
-       owner.car = car1;
+        String[] carsNames = {"car1","car2","car3"};
+        Car[] cars = new Car[3];
+        for (int i = 0; i < 2; i++)
+            cars[i] = new Car(carsNames[i]);
 
-        System.out.println(owner.car);
+        System.out.println(cars[0]);
+        System.out.println(cars[1]);
+        System.out.println(cars[2]);
+
+        do {
+
+        } while (owner.cash > 300000);
+
     }
 }
