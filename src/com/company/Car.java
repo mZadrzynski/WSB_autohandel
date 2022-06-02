@@ -14,7 +14,7 @@ public class Car {
     String carSegments[] = {"A", "B", "C", "D", "S", "dostawczy"};
 
 
-    public Car(String carsName) {
+    public Car (String carsName) {
         Random r = new Random();
         producer = producers[r.nextInt(0, 9)];
         color = colors[r.nextInt(0, 9)];
