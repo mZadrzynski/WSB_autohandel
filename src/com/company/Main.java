@@ -1,5 +1,7 @@
 package com.company;
 import javax.sound.midi.Soundbank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,13 +18,17 @@ public class Main {
         Boolean gameOn = true;
 
 
-
         Owner owner = new Owner();
 
-        String[] carsNames = {"1", "2", "3"};
+        //String[] carsNames = {};
+        ArrayList<String> carsNames = new ArrayList<String>();
+        for (int i= 0; i < 100; i++)
+            carsNames.add(String.valueOf(i));
         Car[] cars = new Car[3];
         for (int i = 0; i < 3; i++)
-            cars[i] = new Car(carsNames[i]);
+            cars[i] = new Car(carsNames.get(i));
+
+
 
         do {
             time.runGame();
@@ -35,10 +41,13 @@ public class Main {
                 case 2:
                     System.out.println("podaj ktore auto chcesz kupic");
                     owner.setCar(cars[userSelect.nextInt()]);
+
                     break;
                 case 3:
                         System.out.println(owner.car);
+                        System.out.println(owner.ownerCars);
                         System.out.println(owner.cash);
+                        System.out.println(carsNames);
                     break;
             }
         } while (gameOn);
