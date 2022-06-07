@@ -29,6 +29,9 @@ public class Main {
         for (int i = 0; i < 3; i++)
             cars.add(String.valueOf(new Car(carsNames.get(i))));
 
+
+
+
         //Car[] cars = new Car[3];
        // for (int i = 0; i < 3; i++)
         //    cars[i] = new Car(carsNames.get(i));
@@ -47,7 +50,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("podaj ktore auto chcesz kupic");
-                   // owner.setCar(cars.set(userSelect.nextInt());
+                    owner.setCar();
                     break;
                 case 3:
                         System.out.println(owner.ownerCars);
@@ -58,22 +61,22 @@ public class Main {
                 case 5:
                     System.out.println("przejrzyj klientow");
                     break;
-                case 5:
+                case 6:
                     System.out.println("sprzedaj auto");
                     break;
-                case 6:
+                case 7:
                     System.out.println("kup reklame");
                     break;
-                case 7:
+                case 8:
                     System.out.println(owner.cash);
                     break;
-                case 8:
+                case 9:
                     System.out.println("sprawdz historie tranzakci");
                     break;
-                case 9:
+                case 10:
                     System.out.println("sprawdz historie naprawy pojazdu");
                     break;
-                case 10:
+                case 11:
                     System.out.println("sprawdz historie i koszty napraw posiadanych pojazdow");
                     break;
             }

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,19 +8,25 @@ public class Owner {
     public String name;
     public Double cash = 150000.0;
     public Car car;
-    List<Car> ownerCars = new ArrayList<Car>();
+    public List cars;
+    List<String> ownerCars = new ArrayList<String>();
+    Scanner userSelect = new Scanner(System.in);
 
     public Owner() {
     }
 
-    public void setCar(Car car){
+    public void setCar(){
         try {
-            this.car = car;
-            this.cash = cash - car.carPrice;
-            ownerCars.add(this.car);
+            System.out.println("podaj ktory samochod chcesz kupic");
+            int i = userSelect.nextInt();
+            //this.cash = cash - car.carPrice;
+            ownerCars.add(String.valueOf(i));
+            cars.remove(String.valueOf(i));
         } catch(Exception e) {
             System.out.println("nie masz wystarczajaco gotowki");
         }
 
     }
+
+
 }
