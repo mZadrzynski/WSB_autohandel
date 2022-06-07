@@ -49,10 +49,11 @@ public class Main {
                     System.out.println(cars.get(2));
                     break;
                 case 2:
-                    System.out.println("podaj ktore auto chcesz kupic");
-                    owner.setCar();
+                    owner.ownerSetCar();
                     break;
                 case 3:
+                        owner.ownerCars.add(cars.get(1));
+
                         System.out.println(owner.ownerCars);
                     break;
                 case 4:
