@@ -23,7 +23,7 @@ public class Owner {
             //if(cash >= car.carPrice) {
                 //this.cash = cash - car.carPrice;
                 //cars.get(i) = this.car;
-                ownerCars.add(cars.get(1));
+                //ownerCars.add(cars.get(1));
                 //cars.remove(String.valueOf(i));
                 //cars.add(String.valueOf(new Car("3")));
             //} else {
