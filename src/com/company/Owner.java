@@ -9,7 +9,7 @@ public class Owner {
     public String name;
     public Double cash = 150000.0;
     public Car car;
-    List<Object> ownerCars = new ArrayList<Object>();
+    List<Car> ownerCars = new ArrayList();
     Scanner userSelect = new Scanner(System.in);
 
     public Owner() {

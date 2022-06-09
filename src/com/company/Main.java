@@ -13,32 +13,17 @@ public class Main {
         Time time = new Time();
         Random rand = new Random();
         Scanner userSelect = new Scanner(System.in);
-        Integer carList;
         Boolean gameOn = true;
 
 
         Owner owner = new Owner();
 
-        //String[] carsNames = {};
-       // ArrayList<String> carsNames = new ArrayList<String>();
-       // for (int i= 0; i < 100; i++)
-        //    carsNames.add(String.valueOf(i));
-        //Car[] cars = new Car[3];
-        ArrayList<String> cars = new ArrayList<String>();
-        for (int i = 0; i < 3; i++)
-            cars.add(String.valueOf(new Car("car" + i)));
 
+        ArrayList<Car> cars = new ArrayList();
+        for (int i = 0; i < 3; i++) {
+            cars.add(new Car("car" + i));
+        }
         int carsLength = cars.size();
-
-
-
-
-        //Car[] cars = new Car[3];
-       // for (int i = 0; i < 3; i++)
-        //    cars[i] = new Car(carsNames.get(i));
-        //usuwanie z listy
-        //cars.remove(0);
-
 
 
 
@@ -56,23 +41,15 @@ public class Main {
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
                         int i= userSelect.nextInt();
-                        owner.ownerCars.add(new Car(cars.get(i)));
-                        cars.remove(i);
-                        carsLength--;
-                        //owner.cash = owner.cash -
-                        System.out.println(carsLength);
-                        //if(owner.cash >= cars) {
-                        //owner.cash = owner.cash - cars.get(i, price).carPrice;
-
-
-
-                        //cars.add(String.valueOf(new Car("3")));
-
-                        //} else {
-                        //System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
-                    }
-                    catch
-                    (Exception e) {
+                            if (owner.cash > cars.get(i).carPrice){
+                                owner.cash = owner.cash - cars.get(i).carPrice;
+                                owner.ownerCars.add(cars.get(i));
+                                cars.remove(i);
+                                cars.add(new Car(String.valueOf(carsLength + 1)));
+                            } else {
+                                System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
+                    }}
+                    catch (Exception e) {
                         System.out.println("cos poszlo nie tak");
                     }
                     break;

@@ -1,4 +1,5 @@
 package com.company;
+import java.util.*;
 import java.util.Random;
 import java.text.DecimalFormat;
 
@@ -12,6 +13,7 @@ public class Car {
     String producers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
     String colors[] = {"bialy", "szary", "czarny", "czerwony", "rozowy", "niebieski", "granatowy", "pomaranczowy", "zielony", "zolty"};
     String carSegments[] = {"A", "B", "C", "D", "S", "dostawczy"};
+
 
 
     public Car (String carsName) {
@@ -36,6 +38,8 @@ public class Car {
             carPrice *= 2.5;
         }
     }
+
+
 
         @Override
         public String toString () {
