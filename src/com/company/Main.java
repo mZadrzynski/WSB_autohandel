@@ -1,6 +1,6 @@
 package com.company;
-import jdk.swing.interop.SwingInterOpUtils;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import javax.sound.midi.Soundbank;
 import java.util.*;
 
@@ -19,12 +19,17 @@ public class Main {
         Owner owner = new Owner();
 
 
+
         ArrayList<Car> cars = new ArrayList();
         for (int i = 0; i < 3; i++) {
-            cars.add(new Car("car" + i));
+            cars.add(new Car("Car" +String.valueOf(i)));
         }
         int carsLength = cars.size();
 
+        ArrayList<Customer> customers = new ArrayList();
+        for (int i = 0; i < 2; i++) {
+            customers.add(new Customer());
+        }
 
 
         do {
@@ -40,7 +45,7 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
-                        int i= userSelect.nextInt();
+                        int i = userSelect.nextInt();
                             if (owner.cash > cars.get(i).carPrice){
                                 owner.cash = owner.cash - cars.get(i).carPrice;
                                 owner.ownerCars.add(cars.get(i));
@@ -50,28 +55,62 @@ public class Main {
                                 System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
                     }}
                     catch (Exception e) {
-                        System.out.println("cos poszlo nie tak");
+                        time.error();
                     }
                     break;
                 case 3:
-                    int i= userSelect.nextInt();
-                    owner.ownerCars.remove(i);
+                    for (int i = 0; i < owner.ownerCars.size(); i++)
+                        System.out.println(owner.ownerCars.get(i));
                     break;
                 case 4:
-                    System.out.println("napraw samochod");
+                    try {
+                        time.carRepairInfo();
+                        switch (userSelect.nextInt()) {
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                        }
+
+                    } catch (Exception e) {
+                        time.error();
+                    }
                     break;
                 case 5:
-                    System.out.println("przejrzyj klientow");
+                    for (int i = 0; i < customers.size(); i++)
+                        System.out.println(customers.get(i));
                     break;
                 case 6:
                     System.out.println("sprzedaj auto");
                     break;
                 case 7:
-                    System.out.println("kup reklame");
+                    time.advertise();
+                    try {
+                        switch (userSelect.nextInt()) {
+                            case 1:
+                                owner.cash = owner.cash - 3000;
+                                Random r = new Random();
+                                for (int i = 0; i < r.nextInt(1,5); i++) {
+                                    customers.add(new Customer());
+                                }
+                                break;
+                            case 2:
+                                owner.cash = owner.cash - 1000;
+                                customers.add(new Customer());
+                                break;
+                        }
+                    } catch (Exception e) {
+                        time.error();
+                    }
                     break;
                 case 8:
                     System.out.println(owner.cash);
-                    System.out.println(owner.ownerCars);
                     break;
                 case 9:
                     System.out.println("sprawdz historie tranzakci");

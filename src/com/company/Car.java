@@ -1,5 +1,4 @@
 package com.company;
-import java.util.*;
 import java.util.Random;
 import java.text.DecimalFormat;
 
@@ -16,7 +15,8 @@ public class Car {
 
 
 
-    public Car (String carsName) {
+
+    public Car (String carName) {
         Random r = new Random();
         producer = producers[r.nextInt(0, 9)];
         color = colors[r.nextInt(0, 9)];
@@ -38,8 +38,6 @@ public class Car {
             carPrice *= 2.5;
         }
     }
-
-
 
         @Override
         public String toString () {
