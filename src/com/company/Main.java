@@ -2,20 +2,19 @@ package com.company;
 
 import jdk.swing.interop.SwingInterOpUtils;
 import javax.sound.midi.Soundbank;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
 
-
+        final DecimalFormat df = new DecimalFormat("0.00");
         Time time = new Time();
         Random rand = new Random();
         Scanner userSelect = new Scanner(System.in);
         Boolean gameOn = true;
-
-
+        Random r = new Random();
         Owner owner = new Owner();
 
 
@@ -33,6 +32,10 @@ public class Main {
 
 
         do {
+            if(owner.cash > 70000.0) {
+                gameOn = false;
+                time.endGame();
+            }
             time.runGame();
             switch (userSelect.nextInt()) {
                 case 1:
@@ -46,11 +49,12 @@ public class Main {
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
                         int i = userSelect.nextInt();
-                            if (owner.cash > cars.get(i).carPrice){
-                                owner.cash = owner.cash - cars.get(i).carPrice;
+                            if (owner.cash > cars.get(i).carPrice*0.8){
+                                owner.cash = owner.cash - cars.get(i).carPrice*0.8;
                                 owner.ownerCars.add(cars.get(i));
                                 cars.remove(i);
                                 cars.add(new Car(String.valueOf(carsLength + 1)));
+                                time.week+=1;
                             } else {
                                 System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
                     }}
@@ -87,7 +91,33 @@ public class Main {
                         System.out.println(customers.get(i));
                     break;
                 case 6:
-                    System.out.println("sprzedaj auto");
+                    try {
+                        for (int i = 0; i < customers.size(); i++) {
+                            for (int j = 0; j < owner.ownerCars.size(); j++) {
+                                if (customers.get(i).producer1.equals(owner.ownerCars.get(j).producer) || customers.get(i).producer2.equals(owner.ownerCars.get(j).producer)) {
+                                    System.out.println("masz auto na sprzedaz");
+                                    if (customers.get(i).customerCash > owner.ownerCars.get(j).carPrice) {
+                                        System.out.println("kupiec " + customers.get(i).name + " chce kupic " + owner.ownerCars.get(j).producer
+                                                + " za cene " + df.format(owner.ownerCars.get(j).carPrice));
+                                        System.out.println("wpisz 1 jesli chcesz sprzedać");
+                                        if (userSelect.nextInt() == 1) {
+                                            time.sell();
+                                            owner.cash = owner.cash + owner.ownerCars.get(j).carPrice*0.98 - 200.0;
+                                            customers.remove(i);
+                                            owner.ownerCars.remove(j);
+                                            customers.add(new Customer());
+                                            customers.add(new Customer());
+                                            time.week+=1;
+                                        }
+                                    }
+                                }
+                                //j++;
+                            }
+                        }
+
+                    } catch (Exception e){
+                        time.error();
+                }
                     break;
                 case 7:
                     time.advertise();
@@ -95,14 +125,15 @@ public class Main {
                         switch (userSelect.nextInt()) {
                             case 1:
                                 owner.cash = owner.cash - 3000;
-                                Random r = new Random();
                                 for (int i = 0; i < r.nextInt(1,5); i++) {
                                     customers.add(new Customer());
                                 }
+                                time.week+=1;
                                 break;
                             case 2:
                                 owner.cash = owner.cash - 1000;
                                 customers.add(new Customer());
+                                time.week+=1;
                                 break;
                         }
                     } catch (Exception e) {
@@ -110,7 +141,7 @@ public class Main {
                     }
                     break;
                 case 8:
-                    System.out.println(owner.cash);
+                    System.out.println(df.format(owner.cash));
                     break;
                 case 9:
                     System.out.println("sprawdz historie tranzakci");

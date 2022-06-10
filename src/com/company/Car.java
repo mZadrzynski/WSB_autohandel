@@ -46,7 +46,7 @@ public class Car {
                     ", color='" + color + '\'' +
                     ", carSegment='" + carSegment + '\'' +
                     ", mileage=" + mileage +
-                    ", price=" +  df.format(carPrice) +
+                    ", price=" +  df.format(carPrice*0.8) +
                     ", breaks=" + breaks +
                     ", suspension=" + suspension +
                     ", engine=" + engine +

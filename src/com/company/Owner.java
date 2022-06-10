@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Owner {
     public String name;
-    public Double cash = 150000.0;
+    public Double cash = 50000.0;
     public Car car;
     List<Car> ownerCars = new ArrayList();
     Scanner userSelect = new Scanner(System.in);

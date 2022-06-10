@@ -36,4 +36,17 @@ public class Time {
         System.out.println("4 - skrzynie biegow");
         System.out.println("5 - karoserie");
     }
+    public void sell () {
+        System.out.println("brawo sprzedales auto!");
+        System.out.println("koszt mycia auta przed sprzedaza: 200");
+        System.out.println("niestety dopadl Cie urzad skarbowy");
+        System.out.println("musisz zaplacic 2% podatku od sprzedazy");
+    }
+
+    public void endGame () {
+        System.out.println("=======================================================");
+        System.out.println("koniec rozgrywnki");
+        System.out.println("udalo Ci sie wygrac w " + this.week + " tygodniu rozgrywki.");
+        System.out.println("=======================================================");
+    }
 }
