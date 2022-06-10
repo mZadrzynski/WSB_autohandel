@@ -49,4 +49,10 @@ public class Time {
         System.out.println("udalo Ci sie wygrac w " + this.week + " tygodniu rozgrywki.");
         System.out.println("=======================================================");
     }
+    public void loseGame () {
+        System.out.println("=======================================================");
+        System.out.println("BRAWO");
+        System.out.println("ZBANRUKOTOWALES W " + this.week + " tygodniu rozgrywki.");
+        System.out.println("=======================================================");
+    }
 }

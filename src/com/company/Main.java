@@ -11,7 +11,6 @@ public class Main {
 
         final DecimalFormat df = new DecimalFormat("0.00");
         Time time = new Time();
-        Random rand = new Random();
         Scanner userSelect = new Scanner(System.in);
         Boolean gameOn = true;
         Random r = new Random();
@@ -20,7 +19,7 @@ public class Main {
 
 
         ArrayList<Car> cars = new ArrayList();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             cars.add(new Car("Car" +String.valueOf(i)));
         }
         int carsLength = cars.size();
@@ -36,6 +35,10 @@ public class Main {
                 gameOn = false;
                 time.endGame();
             }
+            if(owner.cash < 0.0) {
+                gameOn = false;
+                time.loseGame();
+            }
             time.runGame();
             switch (userSelect.nextInt()) {
                 case 1:
@@ -43,7 +46,7 @@ public class Main {
                         System.out.println("brak aut do zakupu");
                     }
                     for (int i = 0; i < carsLength; i++)
-                        System.out.println(cars.get(i));
+                        System.out.println(i + " - " + cars.get(i));
                     break;
                 case 2:
                     try {

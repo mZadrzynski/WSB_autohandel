@@ -27,7 +27,7 @@ public class Car {
         engine = r.nextBoolean();
         gear = r.nextBoolean();
         body = r.nextBoolean();
-        carPrice = 500000000.0 / mileage;
+        carPrice = 750000000.0 / mileage;
         if (suspension || body && gear) {
             carPrice *= 1.6;
         }
