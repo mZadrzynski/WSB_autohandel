@@ -35,7 +35,7 @@ public class Main {
         }
 
         do {
-            if(owner.cash > 140000.0) {
+            if(owner.cash > 90000.0) {
                 gameOn = false;
                 time.endGame();
             }
@@ -126,32 +126,36 @@ public class Main {
                     try {
                         for (int i = 0; i < customers.size(); i++) {
                             for (int j = 0; j < owner.ownerCars.size(); j++) {
-                                    if ((customers.get(i).producer1.equals(owner.ownerCars.get(j).producer)
+                                    if (customers.get(i).producer1.equals(owner.ownerCars.get(j).producer)
                                             || customers.get(i).producer2.equals(owner.ownerCars.get(j).producer)
-                                            || (cars.get(i).carSegment == "VAN" && customers.get(j).ifVan == true))
-                                            && (cars.get(i).breaks == true)
-                                            && (cars.get(i).engine == true)
-                                            && (cars.get(i).suspension == true)
-                                            && (cars.get(i).gear == true)
-                                            && (cars.get(i).body == true)) {
-                                        System.out.println("masz auto na sprzedaz");
-                                        if (customers.get(i).customerCash > owner.ownerCars.get(j).carPrice) {
-                                            System.out.println("kupiec " + customers.get(i).name + " chce kupic " + owner.ownerCars.get(j).producer
-                                                    + " za cene " + df.format(owner.ownerCars.get(j).carPrice));
-                                            System.out.println("wpisz 1 jesli chcesz sprzedać");
-                                            if (userSelect.nextInt() == 1) {
-                                                time.sell();
-                                                owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
-                                                customers.remove(i);
-                                                owner.ownerCars.remove(j);
-                                                customers.add(new Customer());
-                                                customers.add(new Customer());
-                                                time.week += 1;
+                                            || (cars.get(i).carSegment == "VAN" && customers.get(j).ifVan == true)) {
+                                            if (owner.ownerCars.get(j).gear == true
+                                                && owner.ownerCars.get(j).engine == true
+                                                && owner.ownerCars.get(j).body == true
+                                                && owner.ownerCars.get(j).suspension == true
+                                                && owner.ownerCars.get(j).breaks == true) {
+                                                System.out.println("masz auto na sprzedaz");
+                                                if (customers.get(i).customerCash > owner.ownerCars.get(j).carPrice) {
+                                                    System.out.println("kupiec " + customers.get(i).name + " chce kupic " + owner.ownerCars.get(j).producer
+                                                         + " za cene " + df.format(owner.ownerCars.get(j).carPrice));
+                                                    System.out.println("wpisz 1 jesli chcesz sprzedać");
+                                                if (userSelect.nextInt() == 1) {
+                                                    time.sell();
+                                                    owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
+                                                    customers.remove(i);
+                                                    owner.ownerCars.remove(j);
+                                                    customers.add(new Customer());
+                                                    customers.add(new Customer());
+                                                    time.week += 1;
+                                                }
                                             }
-                                        }
+                                        } else {
+                                                    System.out.println("jest klien zainteresowany(" + owner.ownerCars.get(j).producer + "), ale musisz go naprawić!!!");
+
                                     }
                                 }
                             }
+                        }
                     } catch (Exception e){
                         time.error();
                 }
@@ -183,7 +187,7 @@ public class Main {
                     System.out.println(df.format(owner.cash));
                     break;
                 case 9:
-                    System.out.println("sprawdz historie tranzakci");
+                    System.out.println("sprawdz historie tranzakcji");
                     break;
                 case 10:
                     System.out.println("sprawdz historie naprawy pojazdu");

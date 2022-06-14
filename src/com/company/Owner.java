@@ -69,13 +69,14 @@ public class Owner {
         } else {
             if (repairResult = true) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier;
-                ownerCars.get(i).suspension = true;
-                ownerCars.get(i).carPrice *= 1.2;
                 System.out.println("udalo sie naprawic zawieszenie w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier);
+                ownerCars.get(i).suspension = true;
+                ownerCars.get(i).carPrice *= 1.2;
             } else {
                 System.out.println("nie udalo sie naprawic zawieszenia w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier);
+                this.cash = cash - ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier;
             }
         }
     }
@@ -86,13 +87,14 @@ public class Owner {
         } else {
             if (repairResult = true) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
-                ownerCars.get(i).gear = true;
-                ownerCars.get(i).carPrice *= 1.5;
                 System.out.println("udalo sie naprawic skrzenie biegow w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier);
+                ownerCars.get(i).gear = true;
+                ownerCars.get(i).carPrice *= 1.5;
             } else {
                 System.out.println("nie udalo sie naprawic skrzyni biegow " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier);
+                this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
             }
         }
     }
@@ -103,13 +105,14 @@ public class Owner {
         } else {
             if (repairResult = true) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier;
-                ownerCars.get(i).engine = true;
-                ownerCars.get(i).carPrice *= 2.0;
                 System.out.println("udalo sie naprawic silnik w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier);
+                ownerCars.get(i).engine = true;
+                ownerCars.get(i).carPrice *= 2.0;
             } else {
                 System.out.println("nie udalo sie naprawic silnika w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier);
+                this.cash = cash - ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier;
             }
         }
     }
@@ -120,19 +123,21 @@ public class Owner {
         } else {
             if (repairResult = true) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
-                ownerCars.get(i).body = true;
-                ownerCars.get(i).carPrice *= 1.5;
                 System.out.println("udalo sie wyklepac karoserie " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier);
+                ownerCars.get(i).body = true;
+                ownerCars.get(i).carPrice *= 1.5;
             } else {
                 System.out.println("nie udalo sie wyklepac karoserii " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier);
+                this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
             }
         }
     }
     public void turboFail () {
         if (repairTurboFail) {
             System.out.println("niestety naprawa wyjatkowo sie nie udala");
+            repairTurboFail = false;
             switch (r.nextInt(0, 4)) {
                 case (0):
                     ownerCars.get(i).breaks = false;

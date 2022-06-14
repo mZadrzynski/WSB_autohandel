@@ -23,13 +23,13 @@ public class Car {
         producer = carProducers[r.nextInt(0, 9)];
         color = colors[r.nextInt(0, 9)];
         mileage = r.nextInt(10000, 500000);
-        if (r.nextInt(0,4) == 0) {
+        if (r.nextInt(0,3) == 0) {
             breaks = r.nextBoolean();
             suspension = r.nextBoolean();
             engine = r.nextBoolean();
             gear = true;
             body = true;
-        } else if (r.nextInt(0,4) == 1) {
+        } else if (r.nextInt(0,3) == 1) {
             breaks = true;
             suspension = true;
             engine = true;
