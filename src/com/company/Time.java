@@ -27,6 +27,7 @@ public class Time {
         System.out.println("  - koszt - 3000");
         System.out.println("2 - reklama w internecie");
         System.out.println("  - koszt - 1000");
+        System.out.println("3 - wroc do menu glownego");
     }
     public void carRepairInfo () {
         System.out.println("wybierz co chcesz naprawic");
@@ -54,5 +55,13 @@ public class Time {
         System.out.println("BRAWO");
         System.out.println("ZBANRUKOTOWALES W " + this.week + " tygodniu rozgrywki.");
         System.out.println("=======================================================");
+    }
+
+    public void carMechanicsList () {
+        System.out.println("Wybierz ktory mechanik ma naprawiac auto");
+        System.out.println("1 - Janusz - najdrozszy ale ma 100% szans na powodzenie");
+        System.out.println("2 - Marian - znacznie tańszy ale jest 10% szans ze nie uda mu sie naprawic");
+        System.out.println("3 - Adrian - znacznie tańszy ale jest 20% szans ze nie uda mu sie naprawic");
+        System.out.println("oraz istnieje mala szansa ze zepsuje cos innego");
     }
 }

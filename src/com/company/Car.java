@@ -9,36 +9,50 @@ public class Car {
     public Boolean breaks, suspension, engine, gear, body;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    String producers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
+    String carProducers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
     String colors[] = {"bialy", "szary", "czarny", "czerwony", "rozowy", "niebieski", "granatowy", "pomaranczowy", "zielony", "zolty"};
-    String carSegments[] = {"A", "B", "C", "D", "S", "dostawczy"};
-
+    String carSegments[] = {"A", "B", "C", "D", "S", "VAN"};
+    String vanProducers[] = {"iveco", "fiatVan", "mercedesVan", "wvVan", "fordVan"};
 
 
 
     public Car (String carName) {
         Random r = new Random();
-        producer = producers[r.nextInt(0, 9)];
-        color = colors[r.nextInt(0, 9)];
         carSegment = carSegments[r.nextInt(0, 4)];
+        producer = vanProducers[r.nextInt(0, 4)];
+        producer = carProducers[r.nextInt(0, 9)];
+        color = colors[r.nextInt(0, 9)];
         mileage = r.nextInt(10000, 500000);
-        breaks = r.nextBoolean();
-        suspension = r.nextBoolean();
-        engine = r.nextBoolean();
-        gear = r.nextBoolean();
-        body = r.nextBoolean();
+        if (r.nextInt(0,4) == 0) {
+            breaks = r.nextBoolean();
+            suspension = r.nextBoolean();
+            engine = r.nextBoolean();
+            gear = true;
+            body = true;
+        } else if (r.nextInt(0,4) == 1) {
+            breaks = true;
+            suspension = true;
+            engine = true;
+            gear = r.nextBoolean();
+            body = r.nextBoolean();
+        } else {
+            breaks = true;
+            suspension = true;
+            engine = true;
+            gear = true;
+            body = true;
+        }
         carPrice = 750000000.0 / mileage;
         if (suspension || body && gear) {
             carPrice *= 1.6;
         }
-        if (producer == producers[2] || producer == producers[3]) {
+        if (producer == carProducers[2] || producer == carProducers[3]) {
             carPrice *= 2.0;
         }
         if (carSegment == carSegments[4]) {
             carPrice *= 2.5;
         }
     }
-
         @Override
         public String toString () {
             return "Car " +
@@ -53,6 +67,6 @@ public class Car {
                     ", gear=" + gear +
                     ", body=" + body;
         }
-    }
+}
 
 
