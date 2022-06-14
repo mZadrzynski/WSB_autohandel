@@ -3,11 +3,10 @@ package com.company;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.*;
-;
+
 
 public class Owner {
     public Double cash = 70000.0;
-    public Car car;
     List<Car> ownerCars = new ArrayList();
     Scanner userSelect = new Scanner(System.in);
     public Boolean repairResult;

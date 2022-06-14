@@ -34,6 +34,9 @@ public class Main {
             customers.add(new Customer());
         }
 
+        ArrayList<String> transactionHistory = new ArrayList();
+
+
         do {
             if(owner.cash > 90000.0) {
                 gameOn = false;
@@ -63,9 +66,12 @@ public class Main {
                                 owner.ownerCars.add(cars.get(i));
                                 System.out.println("brawo kupiles " + cars.get(i).producer);
                                 System.out.println("koszty mycia - 200");
+                                transactionHistory.add("tura " + time.week + " ZAKUP " + cars.get(i).producer + cars.get(i).carSegment
+                                + cars.get(i).mileage + cars.get(i).carPrice);
                                 cars.remove(i);
                                 cars.add(new Car(String.valueOf(carsLength + 1)));
                                 time.week+=1;
+
                             } else {
                                 System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
                     }}
@@ -143,6 +149,8 @@ public class Main {
                                                     time.sell();
                                                     owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
                                                     customers.remove(i);
+                                                    transactionHistory.add("tura " + time.week + " SPRZEDAZ " + owner.ownerCars.get(j).producer +
+                                                            owner.ownerCars.get(j).carSegment + owner.ownerCars.get(j).mileage + owner.ownerCars.get(j).carPrice);
                                                     owner.ownerCars.remove(j);
                                                     customers.add(new Customer());
                                                     customers.add(new Customer());
@@ -187,7 +195,11 @@ public class Main {
                     System.out.println(df.format(owner.cash));
                     break;
                 case 9:
-                    System.out.println("sprawdz historie tranzakcji");
+                    if (transactionHistory.size() == 0) {
+                        System.out.println("brak aut do zakupu");
+                    }
+                    for (int i = 0; i < transactionHistory.size(); i++)
+                        System.out.println(i + " - " + transactionHistory.get(i));
                     break;
                 case 10:
                     System.out.println("sprawdz historie naprawy pojazdu");
