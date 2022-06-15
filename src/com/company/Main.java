@@ -18,7 +18,7 @@ public class Main {
 
         ArrayList<Car> cars = new ArrayList();
         for (int i = 0; i < 10; i++) {
-            if (r.nextInt(0, 4) == 0) {
+            if (r.nextInt(0, 8) == 0) {
                 cars.add(new Van("Van" + String.valueOf(i)));
             } else {
                 cars.add(new Car("Car" + String.valueOf(i)));
@@ -50,22 +50,23 @@ public class Main {
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
                         int i = userSelect.nextInt();
-                        if (owner.cash > cars.get(i).carPrice*0.8) {
-                            owner.cash = owner.cash - cars.get(i).carPrice*0.8 - 200.0;
+                        if (owner.cash > cars.get(i).carPrice) {
+                            transactionHistory.add("tura " + time.week + " ZAKUPIONY "
+                                    + cars.get(i).producer +" klasy: "+ cars.get(i).carSegment
+                                    +", o przebiegu: " + cars.get(i).mileage + " za cene: " + df.format(cars.get(i).carPrice));
+                            owner.cash = owner.cash - cars.get(i).carPrice - 200.0;
+                            cars.get(i).carPrice *= (r.nextDouble(1.1,1.5));
                             cars.get(i).repAndWashCost += 200.0;
                             owner.ownerCars.add(cars.get(i));
                             System.out.println("brawo kupiles " + cars.get(i).producer);
                             System.out.println("koszty mycia - 200");
-                            transactionHistory.add("tura " + time.week + " ZAKUPIONY "
-                                    + cars.get(i).producer +" klasy: "+ cars.get(i).carSegment
-                                    +", o przebiegu: " + cars.get(i).mileage + " za cene: " + df.format(cars.get(i).carPrice));
                             cars.remove(i);
                             cars.add(new Car(String.valueOf(carsLength + 1)));
                             time.week+=1;
                         } else {
                             System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
-                        }}
-                    catch (Exception e) {
+                        }
+                    } catch (Exception e) {
                         time.error();
                     }
                     break;
@@ -124,7 +125,7 @@ public class Main {
                             for (int j = 0; j < owner.ownerCars.size(); j++) {
                                 if (customers.get(i).producer1.equals(owner.ownerCars.get(j).producer)
                                         || customers.get(i).producer2.equals(owner.ownerCars.get(j).producer)
-                                        || (cars.get(i).carSegment == "VAN" && customers.get(j).ifVan == true)) {
+                                        || (owner.ownerCars.get(j).carSegment.equals("VAN") && customers.get(i).ifVan)) {
                                     if (owner.ownerCars.get(j).gear == true
                                             && owner.ownerCars.get(j).engine == true
                                             && owner.ownerCars.get(j).body == true
@@ -139,7 +140,7 @@ public class Main {
                                                 time.sell();
                                                 owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
                                                 customers.remove(i);
-                                                transactionHistory.add("tura " + time.week + " SPRZEDANY " + owner.ownerCars.get(j).producer + "klasy: " +
+                                                transactionHistory.add("tura " + time.week + " SPRZEDANY " + owner.ownerCars.get(j).producer + " klasy: " +
                                                         owner.ownerCars.get(j).carSegment +" o przebiegu: " + owner.ownerCars.get(j).mileage + " za cene: "  +
                                                         df.format(owner.ownerCars.get(j).carPrice));
                                                 owner.ownerCars.remove(j);
@@ -166,14 +167,14 @@ public class Main {
                     try {
                         switch (userSelect.nextInt()) {
                             case 1:
-                                owner.cash = owner.cash - 3000;
-                                for (int i = 0; i < r.nextInt(1,5); i++) {
+                                owner.cash = owner.cash - 1500;
+                                for (int i = 0; i <= r.nextInt(2,6); i++) {
                                     customers.add(new Customer());
                                 }
                                 time.week+=1;
                                 break;
                             case 2:
-                                owner.cash = owner.cash - 1000;
+                                owner.cash = owner.cash - 500;
                                 customers.add(new Customer());
                                 time.week+=1;
                                 break;

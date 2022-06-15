@@ -108,7 +108,7 @@ public class Owner {
     public void engineRepair () {
         i = userSelect.nextInt();
         if (ownerCars.get(i).engine) {
-            System.out.println("w aucie " + ownerCars.get(i) + " silnik jest na chodzie");
+            System.out.println("w aucie " + ownerCars.get(i).producer + " silnik jest na chodzie");
         } else {
             if (repairResult) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier;
@@ -128,7 +128,7 @@ public class Owner {
     public void bodyRepair () {
         i = userSelect.nextInt();
         if (ownerCars.get(i).body) {
-            System.out.println("w aucie karoseria " + ownerCars.get(i) + " jest stan igla");
+            System.out.println("w aucie karoseria " + ownerCars.get(i).producer + " jest stan igla");
         } else {
             if (repairResult) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
@@ -147,7 +147,7 @@ public class Owner {
     }
     public void turboFail () {
         if (repairTurboFail) {
-            System.out.println("niestety naprawa wyjatkowo sie nie udala");
+            System.out.println("niesteyt podczas naprawy");
             repairTurboFail = false;
             switch (r.nextInt(0, 4)) {
                 case (0):
@@ -176,27 +176,3 @@ public class Owner {
         }
     }
 }
-
-
-
-// public void ownerSetCar(){
-//try {
-// System.out.println("podaj ktory samochod chcesz kupic");
-//int i = userSelect.nextInt();
-//if(cash >= car.carPrice) {
-//this.cash = cash - car.carPrice;
-//cars.get(i) = this.car;
-//ownerCars.add(cars.get(1));
-//cars.remove(String.valueOf(i));
-//cars.add(String.valueOf(new Car("3")));
-//} else {
-//  System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
-//}
-//} catch(Exception e) {
-//  System.out.println("cos poszlo nie tak");
-//}
-
-// }
-
-
-

@@ -10,27 +10,37 @@ public class Customer {
     public Boolean ifVan;
 
     String names[] = {"Janusz", "Grazyna", "Json", "Zenon", "Marcin", "Roman", "Leon", "Janina", "Elbieta", "Krzysztof"};
-    String producers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
+    String producers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "ssang", "volvo", "wv", "polonez", "ford"};
 
     public Customer() {
         Random r = new Random();
-        name = names[r.nextInt(0, 9)];
-        customerCash = r.nextDouble(5000, 200000);
-        producer1 = producers[r.nextInt(0, 9)];
-        producer2 = producers[r.nextInt(0,9)];
-        if (producer1.equals(producer2)) {
-            producer1 = producers[r.nextInt(0, 9)];
-            producer2 = producers[r.nextInt(0,9)];
+        name = names[r.nextInt(1, 10)];
+        if (r.nextInt(0,10) == 1) {
+            customerCash = r.nextDouble(150000, 200000);
+        } else if (r.nextInt(0,4) == 1) {
+            customerCash = r.nextDouble(50000, 150000);
+        } else {
+            customerCash = r.nextDouble(5000, 50000);
         }
-        ifVan = r.nextBoolean();
+        producer1 = producers[r.nextInt(1, 10)];
+        producer2 = producers[r.nextInt(1,10)];
+        if (producer1.equals(producer2)) {
+            producer1 = producers[r.nextInt(1, 10)];
+            producer2 = producers[r.nextInt(1,10)];
+        }
+        if (r.nextInt(0,8) == 0) {
+            ifVan = true;
+        } else {
+            ifVan = false;
+        }
     }
 
     @Override
     public String toString() {
-        return "Klient: '" + name + '\'' +
+        return  name +
                 ", gotowka: " + df.format(customerCash) +
                 " marka: " + producer1  +
                 " lub " + producer2  +
-                ", zainteresowany Vanem: " + ifVan;
+                ", zainteresowany vanem: " + ifVan;
     }
 }

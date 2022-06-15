@@ -10,8 +10,7 @@ public class Car {
     private static final DecimalFormat df = new DecimalFormat("0.00");
     public ArrayList<String> carRepairHistory = new ArrayList<>();
 
-
-    String carProducers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
+    String carProducers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "ssang", "volvo", "wv", "polonez", "ford"};
     String colors[] = {"bialy", "szary", "czarny", "czerwony", "rozowy", "niebieski", "granatowy", "pomaranczowy", "zielony", "zolty"};
     String carSegments[] = {"A", "B", "C", "D", "S", "VAN"};
     String vanProducers[] = {"iveco", "fiatVan", "mercedesVan", "wvVan", "fordVan"};
@@ -21,11 +20,11 @@ public class Car {
     public Car (String carName) {
         Random r = new Random();
         repAndWashCost = 0.0;
-        carSegment = carSegments[r.nextInt(0, 4)];
-        producer = vanProducers[r.nextInt(0, 4)];
-        producer = carProducers[r.nextInt(0, 9)];
-        color = colors[r.nextInt(0, 9)];
-        mileage = r.nextInt(10000, 500000);
+        carSegment = carSegments[r.nextInt(1, 5)];
+        producer = vanProducers[r.nextInt(1, 5)];
+        producer = carProducers[r.nextInt(1, 10)];
+        color = colors[r.nextInt(1, 10)];
+        mileage = r.nextInt(100, 350000);
         if (r.nextInt(0,3) == 0) {
             breaks = r.nextBoolean();
             suspension = r.nextBoolean();
@@ -45,15 +44,24 @@ public class Car {
             gear = true;
             body = true;
         }
-        carPrice = 1250000000.0 / mileage;
-        if (suspension || body && gear) {
-            carPrice *= 1.9;
+        carPrice = 3000.0 + 1250000000.0 / (mileage * r.nextDouble(0.3,4.5));
+        if (engine || (body && gear)) {
+            carPrice *= 1.5;
         }
-        if (producer == carProducers[2] || producer == carProducers[3]) {
-            carPrice *= 3.0;
+        if (engine && gear && suspension) {
+            carPrice *= 2.0;
         }
-        if (carSegment == carSegments[4]) {
-            carPrice *= 2.8;
+        if (producer == carProducers[3] || producer == carProducers[4]) {
+            carPrice *= 2.0;
+        }
+        if (producer == carProducers[5] || producer == carProducers[6] || producer == carProducers[9] ) {
+            carPrice *= 0.3;
+        }
+        if (carSegment == carSegments[5]) {
+            carPrice *= 3.5;
+        }
+        if (this.carPrice >= 150000.0) {
+            this.carPrice = 150000.0;
         }
     }
         @Override
@@ -63,7 +71,7 @@ public class Car {
                         " klasy: " + carSegment +
                         ", color: " + color +
                         ", przebieg: " + mileage +
-                        ", cena: " + df.format(carPrice * 0.8) +
+                        ", cena: " + df.format(carPrice) +
                         ", uszkodzenia: brak ";
 
             } else {
@@ -71,7 +79,7 @@ public class Car {
                         " klasy: " + carSegment +
                         ", color: " + color +
                         ", przebieg: " + mileage +
-                        ", cena: " + df.format(carPrice * 0.8) +
+                        ", cena: " + df.format(carPrice) +
                         ", hamulce: " + breaks +
                         ", zawieszenie: " + suspension +
                         ", silnik: " + engine +

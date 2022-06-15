@@ -14,21 +14,21 @@ public class Time {
         System.out.println("6 - sprzedaj auto");
         System.out.println("7 - kup reklame");
         System.out.println("8 - sprawdz stan konta");
-        System.out.println("9 - sprawdz historie tranzakcji");
+        System.out.println("9 - sprawdz historie transakcji");
         System.out.println("10 - sprawdz historie napraw pojazdu");
         System.out.println("11 - sprawdz sume kosztow mycia i napraw pojazdu");
     }
 
     public void error() {
-        System.out.println("cos poszlo nie tak");
+        System.out.println("...");
     }
 
     public void advertise() {
         System.out.println("wybierz jaka rekleme chcerz kupic");
         System.out.println("1 - reklama w gazecie");
-        System.out.println("  - koszt - 3000");
+        System.out.println("  - koszt - 1500");
         System.out.println("2 - reklama w internecie");
-        System.out.println("  - koszt - 1000");
+        System.out.println("  - koszt - 500");
         System.out.println("3 - wroc do menu glownego");
     }
 
