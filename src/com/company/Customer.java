@@ -15,9 +15,13 @@ public class Customer {
     public Customer() {
         Random r = new Random();
         name = names[r.nextInt(0, 9)];
-        customerCash = r.nextDouble(3000, 80000);
+        customerCash = r.nextDouble(5000, 200000);
         producer1 = producers[r.nextInt(0, 9)];
         producer2 = producers[r.nextInt(0,9)];
+        if (producer1.equals(producer2)) {
+            producer1 = producers[r.nextInt(0, 9)];
+            producer2 = producers[r.nextInt(0,9)];
+        }
         ifVan = r.nextBoolean();
     }
 

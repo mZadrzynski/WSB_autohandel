@@ -18,19 +18,28 @@ public class Van extends Car{
 
     @Override
     public String toString () {
-        return "Van " +
-                "producer='" + producer + '\'' +
-                ", color='" + color + '\'' +
-                ", carSegment='" + carSegment + '\'' +
-                ", mileage=" + mileage +
-                ", price=" +  df.format(carPrice*0.8) +
-                ", breaks=" + breaks +
-                ", suspension=" + suspension +
-                ", engine=" + engine +
-                ", gear=" + gear +
-                ", body=" + body +
-                ", capacity=" + vanCapacity + "kg";
+        if (breaks && suspension && engine && gear && body) {
+            return producer +
+                    " klasy: " + carSegment +
+                    ", color: " + color +
+                    ", przebieg: " + mileage +
+                    ", cena: " + df.format(carPrice * 0.8) +
+                    ", uszkodzenia: brak " +
+                    ", pojemnosc: " + vanCapacity + "kg";
 
+        } else {
+            return  producer +
+                    " klasy: " + carSegment +
+                    ", color: " + color +
+                    ", przebieg: " + mileage +
+                    ", cena: " + df.format(carPrice * 0.8) +
+                    ", hamulce: " + breaks +
+                    ", zawieszenie: " + suspension +
+                    ", silnik: " + engine +
+                    ", skrzynia biegow: " + gear +
+                    ", karoseria: " + body +
+                    ", pojemnosc: " + vanCapacity + "kg";
+        }
     }
 }
 

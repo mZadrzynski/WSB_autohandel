@@ -1,13 +1,14 @@
 package com.company;
-import java.util.Random;
+import java.util.*;
 import java.text.DecimalFormat;
 
 public class Car {
     public String producer, color, carSegment;
     public Integer mileage;
-    public Double carPrice;
+    public Double carPrice, repAndWashCost;
     public Boolean breaks, suspension, engine, gear, body;
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    public ArrayList<String> carRepairHistory = new ArrayList<>();
 
 
     String carProducers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
@@ -19,6 +20,7 @@ public class Car {
 
     public Car (String carName) {
         Random r = new Random();
+        repAndWashCost = 0.0;
         carSegment = carSegments[r.nextInt(0, 4)];
         producer = vanProducers[r.nextInt(0, 4)];
         producer = carProducers[r.nextInt(0, 9)];
@@ -43,31 +45,42 @@ public class Car {
             gear = true;
             body = true;
         }
-        carPrice = 750000000.0 / mileage;
+        carPrice = 1250000000.0 / mileage;
         if (suspension || body && gear) {
-            carPrice *= 1.6;
+            carPrice *= 1.9;
         }
         if (producer == carProducers[2] || producer == carProducers[3]) {
-            carPrice *= 2.0;
+            carPrice *= 3.0;
         }
         if (carSegment == carSegments[4]) {
-            carPrice *= 2.5;
+            carPrice *= 2.8;
         }
     }
         @Override
         public String toString () {
-            return "Car " +
-                    "producer='" + producer + '\'' +
-                    ", color='" + color + '\'' +
-                    ", carSegment='" + carSegment + '\'' +
-                    ", mileage=" + mileage +
-                    ", price=" +  df.format(carPrice*0.8) +
-                    ", breaks=" + breaks +
-                    ", suspension=" + suspension +
-                    ", engine=" + engine +
-                    ", gear=" + gear +
-                    ", body=" + body;
+            if (breaks && suspension && engine && gear && body) {
+                return producer +
+                        " klasy: " + carSegment +
+                        ", color: " + color +
+                        ", przebieg: " + mileage +
+                        ", cena: " + df.format(carPrice * 0.8) +
+                        ", uszkodzenia: brak ";
+
+            } else {
+                return  producer +
+                        " klasy: " + carSegment +
+                        ", color: " + color +
+                        ", przebieg: " + mileage +
+                        ", cena: " + df.format(carPrice * 0.8) +
+                        ", hamulce: " + breaks +
+                        ", zawieszenie: " + suspension +
+                        ", silnik: " + engine +
+                        ", skrzynia biegow: " + gear +
+                        ", karoseria: " + body;
+            }
+
         }
+
 }
 
 

@@ -36,15 +36,6 @@ public class Main {
 
 
         do {
-            if(owner.cash > 90000.0) {
-                gameOn = false;
-                time.endGame();
-            }
-
-            if(owner.cash < 0.0) {
-                gameOn = false;
-                time.loseGame();
-            }
 
             time.runGame();
             switch (userSelect.nextInt()) {
@@ -59,20 +50,21 @@ public class Main {
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
                         int i = userSelect.nextInt();
-                            if (owner.cash > cars.get(i).carPrice*0.8) {
-                                owner.cash = owner.cash - cars.get(i).carPrice*0.8 - 200.0;
-                                owner.ownerCars.add(cars.get(i));
-                                System.out.println("brawo kupiles " + cars.get(i).producer);
-                                System.out.println("koszty mycia - 200");
-                                transactionHistory.add("tura " + time.week + " ZAKUPIONY "
-                                + cars.get(i).producer +"klasy: "+ cars.get(i).carSegment
-                                +" o przebiegu: " + cars.get(i).mileage + " za cene: " +cars.get(i).carPrice);
-                                cars.remove(i);
-                                cars.add(new Car(String.valueOf(carsLength + 1)));
-                                time.week+=1;
-                            } else {
-                                System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
-                    }}
+                        if (owner.cash > cars.get(i).carPrice*0.8) {
+                            owner.cash = owner.cash - cars.get(i).carPrice*0.8 - 200.0;
+                            cars.get(i).repAndWashCost += 200.0;
+                            owner.ownerCars.add(cars.get(i));
+                            System.out.println("brawo kupiles " + cars.get(i).producer);
+                            System.out.println("koszty mycia - 200");
+                            transactionHistory.add("tura " + time.week + " ZAKUPIONY "
+                                    + cars.get(i).producer +" klasy: "+ cars.get(i).carSegment
+                                    +", o przebiegu: " + cars.get(i).mileage + " za cene: " + df.format(cars.get(i).carPrice));
+                            cars.remove(i);
+                            cars.add(new Car(String.valueOf(carsLength + 1)));
+                            time.week+=1;
+                        } else {
+                            System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
+                        }}
                     catch (Exception e) {
                         time.error();
                     }
@@ -130,45 +122,44 @@ public class Main {
                     try {
                         for (int i = 0; i < customers.size(); i++) {
                             for (int j = 0; j < owner.ownerCars.size(); j++) {
-                                    if (customers.get(i).producer1.equals(owner.ownerCars.get(j).producer)
-                                            || customers.get(i).producer2.equals(owner.ownerCars.get(j).producer)
-                                            || (cars.get(i).carSegment == "VAN" && customers.get(j).ifVan == true)) {
-                                            if (owner.ownerCars.get(j).gear == true
-                                                && owner.ownerCars.get(j).engine == true
-                                                && owner.ownerCars.get(j).body == true
-                                                && owner.ownerCars.get(j).suspension == true
-                                                && owner.ownerCars.get(j).breaks == true) {
-                                                System.out.println("masz auto na sprzedaz");
-                                                if (customers.get(i).customerCash > owner.ownerCars.get(j).carPrice) {
-                                                    System.out.println("kupiec " + customers.get(i).name + " chce kupic " + owner.ownerCars.get(j).producer
-                                                         + " za cene " + df.format(owner.ownerCars.get(j).carPrice));
-                                                    System.out.println("wpisz 1 jesli chcesz sprzedać");
-                                                if (userSelect.nextInt() == 1) {
-                                                    time.sell();
-                                                    owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
-                                                    customers.remove(i);
-                                                    transactionHistory.add("tura " + time.week + " SPRZEDANY " + owner.ownerCars.get(j).producer + "klasy: " +
-                                                    owner.ownerCars.get(j).carSegment +" o przebiegu: " + owner.ownerCars.get(j).mileage + " za cene: "  +
-                                                    owner.ownerCars.get(j).carPrice);
-                                                    owner.ownerCars.remove(j);
-                                                    customers.add(new Customer());
-                                                    customers.add(new Customer());
-                                                    time.week += 1;
-                                                }
+                                if (customers.get(i).producer1.equals(owner.ownerCars.get(j).producer)
+                                        || customers.get(i).producer2.equals(owner.ownerCars.get(j).producer)
+                                        || (cars.get(i).carSegment == "VAN" && customers.get(j).ifVan == true)) {
+                                    if (owner.ownerCars.get(j).gear == true
+                                            && owner.ownerCars.get(j).engine == true
+                                            && owner.ownerCars.get(j).body == true
+                                            && owner.ownerCars.get(j).suspension == true
+                                            && owner.ownerCars.get(j).breaks == true) {
+                                        System.out.println("masz auto na sprzedaz");
+                                        if (customers.get(i).customerCash > owner.ownerCars.get(j).carPrice) {
+                                            System.out.println("kupiec " + customers.get(i).name + " chce kupic " + owner.ownerCars.get(j).producer
+                                                    + " za cene " + df.format(owner.ownerCars.get(j).carPrice));
+                                            System.out.println("wpisz 1 jesli chcesz sprzedać");
+                                            if (userSelect.nextInt() == 1) {
+                                                time.sell();
+                                                owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
+                                                customers.remove(i);
+                                                transactionHistory.add("tura " + time.week + " SPRZEDANY " + owner.ownerCars.get(j).producer + "klasy: " +
+                                                        owner.ownerCars.get(j).carSegment +" o przebiegu: " + owner.ownerCars.get(j).mileage + " za cene: "  +
+                                                        df.format(owner.ownerCars.get(j).carPrice));
+                                                owner.ownerCars.remove(j);
+                                                customers.add(new Customer());
+                                                customers.add(new Customer());
+                                                time.week += 1;
                                             }
                                         } else {
-                                                    System.out.println("jest klien zainteresowany(" + owner.ownerCars.get(j).producer + "), ale musisz go naprawić!!!");
-
+                                            System.out.println("klient " + customers.get(i).name + " niestety nie ma wystarczajaco gotowki");
+                                        }
+                                    } else {
+                                        System.out.println("klient " + customers.get(i).name + " jest zainteresowany(" +
+                                                owner.ownerCars.get(j).producer + "), ale musisz go naprawić!!!");
                                     }
-                                        transactionHistory.add("tura " + time.week + " ZAKUPIONY "
-                                                + cars.get(i).producer +"klasy: "+ cars.get(i).carSegment
-                                                +" o przebiegu: " + cars.get(i).mileage + " za cene: " +cars.get(i).carPrice);
                                 }
                             }
                         }
                     } catch (Exception e){
                         time.error();
-                }
+                    }
                     break;
                 case 7:
                     time.advertise();
@@ -198,17 +189,34 @@ public class Main {
                     break;
                 case 9:
                     if (transactionHistory.size() == 0) {
-                        System.out.println("brak aut do zakupu");
+                        System.out.println("nie dokonales jeszcze zadnej tranzakcji");
                     }
                     for (int i = 0; i < transactionHistory.size(); i++)
                         System.out.println(i + " - " + transactionHistory.get(i));
                     break;
                 case 10:
-                    System.out.println("sprawdz historie naprawy pojazdu");
-                    break;
+                    time.carRepHistory();
+                    try {
+                        System.out.println(owner.ownerCars.get(userSelect.nextInt()).carRepairHistory);
+                    } catch (Exception e) {
+                        time.error();
+                    }
                 case 11:
-                    System.out.println("sprawdz historie i koszty napraw posiadanych pojazdow");
-                    break;
+                    time.carRepCost();
+                    try {
+                        System.out.println(df.format(owner.ownerCars.get(userSelect.nextInt()).repAndWashCost));
+                    } catch (Exception e) {
+                        time.error();
+                    }
+            }
+            if(owner.cash > 150000.0) {
+                gameOn = false;
+                time.endGame();
+            }
+
+            if(owner.cash < 0.0) {
+                gameOn = false;
+                time.loseGame();
             }
         } while (gameOn);
     }
