@@ -5,7 +5,7 @@ public class Time {
     public Integer week = 0;
 
     public void runGame() {
-        System.out.println("wybierz co chcesz zrobic!");
+        System.out.println("wybierz co chcesz zrobic! wpisz w konsole odpowiedni numer.");
         System.out.println("1 - przegladaj baze aut do kupienia");
         System.out.println("2 - zakup auto");
         System.out.println("3 - przegladaj baze posiadanych aut");

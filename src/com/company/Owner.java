@@ -61,6 +61,8 @@ public class Owner {
             } else {
                 System.out.println("nie udalo sie naprawic hamulcow w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + df.format(ownerCars.get(i).carPrice * 0.02 * repairCostMultiplier));
+                ownerCars.get(i).carRepairHistory.add("nie udalo sie naprawic hamulcow koszt: " + df.format(ownerCars.get(i).carPrice * 0.02 * repairCostMultiplier));
+                this.cash = cash - ownerCars.get(i).carPrice * 0.02 * repairCostMultiplier;
             }
         }
     }
@@ -81,6 +83,7 @@ public class Owner {
             } else {
                 System.out.println("nie udalo sie naprawic zawieszenia w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + df.format(ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier));
+                ownerCars.get(i).carRepairHistory.add("nie udalo sie naprawic sie zawieszenia koszt: " + df.format(ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier));
                 this.cash = cash - ownerCars.get(i).carPrice * 0.04 * repairCostMultiplier;
             }
         }
@@ -101,6 +104,7 @@ public class Owner {
             } else {
                 System.out.println("nie udalo sie naprawic skrzyni biegow " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + df.format(ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier));
+                ownerCars.get(i).carRepairHistory.add("nie udalo naprawic sie skrzyni biegow: " + df.format(ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier));
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
             }
         }
@@ -121,6 +125,7 @@ public class Owner {
             } else {
                 System.out.println("nie udalo sie naprawic silnika w " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + df.format(ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier));
+                ownerCars.get(i).carRepairHistory.add("nie udalo sie naprawic silnika koszt: " + df.format(ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier));
                 this.cash = cash - ownerCars.get(i).carPrice * 0.2 * repairCostMultiplier;
             }
         }
@@ -128,7 +133,7 @@ public class Owner {
     public void bodyRepair () {
         i = userSelect.nextInt();
         if (ownerCars.get(i).body) {
-            System.out.println("w aucie karoseria " + ownerCars.get(i).producer + " jest stan igla");
+            System.out.println("w aucie karoseria " + ownerCars.get(i).producer + " jest stan igla!");
         } else {
             if (repairResult) {
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
@@ -141,34 +146,35 @@ public class Owner {
             } else {
                 System.out.println("nie udalo sie wyklepac karoserii " + ownerCars.get(i).producer);
                 System.out.println("koszt naprawy wyniosl: " + df.format(ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier));
+                ownerCars.get(i).carRepairHistory.add("nie udalo sie naprawic koszt: " + df.format(ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier));
                 this.cash = cash - ownerCars.get(i).carPrice * 0.1 * repairCostMultiplier;
             }
         }
     }
     public void turboFail () {
         if (repairTurboFail) {
-            System.out.println("niesteyt podczas naprawy");
+            System.out.println("niestety podczas naprawy...");
             repairTurboFail = false;
             switch (r.nextInt(0, 4)) {
                 case (0):
                     ownerCars.get(i).breaks = false;
-                    System.out.println("dodatkowo zepsute zostaly hamulce");
+                    System.out.println("...dodatkowo zepsute zostaly hamulce");
                     break;
                 case (1):
                     ownerCars.get(i).suspension = false;
-                    System.out.println("dodatkowo zepsute zostalo zawieszenie");
+                    System.out.println("...dodatkowo zepsute zostalo zawieszenie");
                     break;
                 case (2):
                     ownerCars.get(i).engine = false;
-                    System.out.println("mechanik zatarl silnik");
+                    System.out.println("...mechanik zatarl silnik");
                     break;
                 case (3):
                     ownerCars.get(i).body = false;
-                    System.out.println("mechanik porysowal cala karoserie");
+                    System.out.println("...mechanik porysowal cala karoserie");
                     break;
                 case (4):
                     ownerCars.get(i).gear = false;
-                    System.out.println("mechanik zaoral przekladnie");
+                    System.out.println("...mechanik zaoral przekladnie");
                     break;
             }
         } else {

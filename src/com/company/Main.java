@@ -59,7 +59,7 @@ public class Main {
                             cars.get(i).repAndWashCost += 200.0;
                             owner.ownerCars.add(cars.get(i));
                             System.out.println("brawo kupiles " + cars.get(i).producer);
-                            System.out.println("koszty mycia - 200");
+                            System.out.println("koszty mycia aucia wynosi 200");
                             cars.remove(i);
                             cars.add(new Car(String.valueOf(carsLength + 1)));
                             time.week+=1;
