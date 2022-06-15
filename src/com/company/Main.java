@@ -209,7 +209,7 @@ public class Main {
                         time.error();
                     }
             }
-            if(owner.cash > 150000.0) {
+            if(owner.cash > 200000.0) {
                 gameOn = false;
                 time.endGame();
             }
