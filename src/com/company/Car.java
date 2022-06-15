@@ -9,6 +9,7 @@ public class Car {
     public Boolean breaks, suspension, engine, gear, body;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+
     String carProducers[] = {"toyota", "mazda", "bmw", "mercedes", "fiat", "kia", "fiat", "wv", "audi", "ford"};
     String colors[] = {"bialy", "szary", "czarny", "czerwony", "rozowy", "niebieski", "granatowy", "pomaranczowy", "zielony", "zolty"};
     String carSegments[] = {"A", "B", "C", "D", "S", "VAN"};

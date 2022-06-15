@@ -1,7 +1,5 @@
 package com.company;
 
-import jdk.swing.interop.SwingInterOpUtils;
-import javax.sound.midi.Soundbank;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -61,17 +59,17 @@ public class Main {
                     try {
                         System.out.println("podaj ktory samochod chcesz kupic");
                         int i = userSelect.nextInt();
-                            if (owner.cash > cars.get(i).carPrice*0.8){
+                            if (owner.cash > cars.get(i).carPrice*0.8) {
                                 owner.cash = owner.cash - cars.get(i).carPrice*0.8 - 200.0;
                                 owner.ownerCars.add(cars.get(i));
                                 System.out.println("brawo kupiles " + cars.get(i).producer);
                                 System.out.println("koszty mycia - 200");
-                                transactionHistory.add("tura " + time.week + " ZAKUP " + cars.get(i).producer + cars.get(i).carSegment
-                                + cars.get(i).mileage + cars.get(i).carPrice);
+                                transactionHistory.add("tura " + time.week + " ZAKUPIONY "
+                                + cars.get(i).producer +"klasy: "+ cars.get(i).carSegment
+                                +" o przebiegu: " + cars.get(i).mileage + " za cene: " +cars.get(i).carPrice);
                                 cars.remove(i);
                                 cars.add(new Car(String.valueOf(carsLength + 1)));
                                 time.week+=1;
-
                             } else {
                                 System.out.println("nie masz wystarczajaco gotowki by kupic to auto");
                     }}
@@ -149,8 +147,9 @@ public class Main {
                                                     time.sell();
                                                     owner.cash = owner.cash + owner.ownerCars.get(j).carPrice * 0.98 - 200.0;
                                                     customers.remove(i);
-                                                    transactionHistory.add("tura " + time.week + " SPRZEDAZ " + owner.ownerCars.get(j).producer +
-                                                            owner.ownerCars.get(j).carSegment + owner.ownerCars.get(j).mileage + owner.ownerCars.get(j).carPrice);
+                                                    transactionHistory.add("tura " + time.week + " SPRZEDANY " + owner.ownerCars.get(j).producer + "klasy: " +
+                                                    owner.ownerCars.get(j).carSegment +" o przebiegu: " + owner.ownerCars.get(j).mileage + " za cene: "  +
+                                                    owner.ownerCars.get(j).carPrice);
                                                     owner.ownerCars.remove(j);
                                                     customers.add(new Customer());
                                                     customers.add(new Customer());
@@ -161,6 +160,9 @@ public class Main {
                                                     System.out.println("jest klien zainteresowany(" + owner.ownerCars.get(j).producer + "), ale musisz go naprawić!!!");
 
                                     }
+                                        transactionHistory.add("tura " + time.week + " ZAKUPIONY "
+                                                + cars.get(i).producer +"klasy: "+ cars.get(i).carSegment
+                                                +" o przebiegu: " + cars.get(i).mileage + " za cene: " +cars.get(i).carPrice);
                                 }
                             }
                         }
